@@ -1,0 +1,63 @@
+QUERYS APUNTES. 
+3 asuntos dentro de la empresa customer, product y sales.
+Con los comandos Select te traes las tablas
+
+6 VIDEO: CASE STUDY PART 2
+Select * from Customer;
+
+Select * from Product;
+
+Select * from Sales;
+
+/* Marketing */
+
+	select region, case 	when age>54 then 'Category 3'
+				when age>36 then 'Category 1'
+				else 'category2' end as  age_group
+				,count(*)
+		from customer group by region, age_group
+		order by region, count desc;
+
+PODES VER POR EJEMPLO QUE CATEGORIA ES LA MAYORITARIA EN CADA UNA DE LAS REGIONES, FACILMENTE. 
+EN SOUTH PRIMA LA CATEGORIA 3, PORLO QUE HARA CAMPAÑAS APLICADAS A ESE TARGET EN ESA REGION. 
+
+/* Supply chain*/
+TE PIDEN 2 QUERIS
+LOS 5 MAS VENDIDOS EN EAST REGION:
+
+	select c.product_id,d.product_name,c.total_q_sold
+	form(select e.product_id,sum(e.quantity) as total_q_sold from (
+		select a.*,b.region
+		from sales as a
+		left join customer as b
+		on a.customer_id=b.customer_id) as e where w.region = 'East' group by e.product_id) as c
+	left join product as d
+	on c.product_id=d.product_id
+	order by total_q_sold desc
+	limit 5;
+
+PRIMERO SELECCIONO LO QUE QUIERO, LUEGO PIDO LA CANTIDAD Y LE ESPESIFICO LA REGION
+
+5 MENOS VENDIDOS EN SOUTH REGION
+
+	select c.product_id,d.product_name,c.total_q_sold
+	from (select e.product_id,sum(e.quantity) as total_q_sold from (
+		select a.*,b.region
+		from sales as a
+		left join customer as b
+		on a.customer_id=b.customer_id) as e where e.region = 'South' group by e.product_id) as c
+	left join product as d
+	on c.product_id=d.product_id
+	order by total_q_sold asc
+	limit5;
+
+/* Financial Manager */
+TOTAL REVENUE LOSS DUE TO DISCOUNTS
+TOTAL REVENUE AND SICOUNTS FOR EACH PRODUCT
+
+	select sum(discount*sales) as total_discount from sales;
+	
+	Select product_id, sum(discount*sales) as Discount, (sum(sales)-sum(discount*sales)) as Revenue, sum(discount*sales)/(sum(sales))
+	Group by product_id
+	order_by Ratio desc;
+
