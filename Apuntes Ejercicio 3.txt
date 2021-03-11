@@ -1,0 +1,21 @@
+EJERCICIO 3
+
+1) Recupera toda la data de la tabla 'Science_Class'.
+copy 'Science_Class' from 'C:\Users\raul\Documents\Data Science Proyectos\SQL\UDEMY\Data\Data\Science_Class.csv' delimiter ',' csv header;
+
+2) Recupera el nombre de los estudiantes que han sacado notas mayores a 60 puntos. Science_Marks
+
+
+SELECT first_name FROM Science_Class WHERE Science_Marks > 60;
+
+3) Recupera todos los datos de los estudantes que han sacado notas mayores a 35 pero menores a 60.
+
+SELECT * FROM Science_Class 
+WHERE Science_Marks > 35
+AND Science_Marks > 60;
+
+4) Recupera todos los estudiantes que han sacado menos o igual que 35 o mas o igual que 60 puntos. 
+
+SELECT * FROM Science_Class 
+WHERE Science_Marks <= 35
+OR Science_Marks >= 60;

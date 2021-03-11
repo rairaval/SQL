@@ -1,0 +1,20 @@
+**** EJERCICIO 2 ****
+1) Insert the following data into Science_class Using insert into command
+
+1 Popeye 33
+2 Olive 54
+3 Brutus 93
+
+2) Import data csv file syudent.csv 
+
+
+RESULTADOS
+
+INSERT INTO Science_class 
+VALUES 
+(1, 'Popeye', 35),
+(2, 'Olive', 54),
+(3, 'Brutus', 98);
+
+#imprtarData
+copy customer_table from 'C:\Users\raul\Documents\Data Science Proyectos\SQL\UDEMY\Data\Data\Student.csv' delimiter ',' csv header;

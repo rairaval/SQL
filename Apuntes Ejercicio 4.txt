@@ -1,0 +1,31 @@
+Exercise 4
+
+1) Update the marks of Popeye to 45
+
+UPDATE Science_Class
+SET marks =46 
+WHERE Name = 'Popeye';
+
+
+2) Delete the row containing details of student named 'Robb'
+
+DELETE FROM Science_Class
+WHERE name = 'Robb';
+
+3) Rename column 'Name' to 'student_name'
+ACA USO LOS COMANDOS ALTER
+
+*************************************
+CUESTIONARIO:
+*************************************
+
+When retrieving data in a particular table, we use the_____________ statement.
+SELECT FROM
+
+We add data to PostgreSQL by using which statement?
+INSERT
+
+The OR operator displays records if ANY conditions listed are true. The AND operator displays records if ALL of the listed conditions are true
+TRUE
+
+
