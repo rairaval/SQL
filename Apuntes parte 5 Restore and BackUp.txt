@@ -1,0 +1,39 @@
+*****************************************
+***** PARTE 5: RESTORE AND BACK-UP ******
+
+Me descargue una data base 
+que estaba compuesta por 3 tablas: customer, product y sales.
+Constituye la base de datos SuperMart_DB
+
+Everyday whichever sales are made, it is storing which customer bought that product and what was the pruduct id.
+LA TABLA DE VENTAS TIENE (Order_LINE) AS THE PRIMARY KEY (habra una unica ordeRLINE para cada pedido) que tambien tiene en la tabla de ventas 
+un costumer id. un mismo costumer puede tener distintas order LINES
+
+RESUMEN
+CUSTOMER: customer_id
+PRODUCT: product_id
+SALES: Order_line
+
+Cada Primary Key es aquella que no se repite en la Tabla. 
+
+*******
+BACK UP
+*******
+te posicionas en la data base en este caso llamada SuperMart_DB
+	BOTON DERECHO BACK UP
+		le das un nombre y haces el BackUp
+
+If your restore fails, then...
+The first thing to ensure is that you have a clean DB when you are restoring. So, create a new DB for restoring the data and avoid using old Database for restoring.
+
+Note that, in the course resources ZIP file shared in the third lecture, we have provided two TAR files. These are for different versions of PostgreSQL. Use them as per the name given to the TAR file and your postgreSQL version.
+
+If you are facing any difficulty in restoring the given tar file, you can try using the "BACKUP" extension file provided in the zip file. The process is exactly the same, only in place of the TAR file you have to select the "supermart.backup" file. Once you restore, do not forget to refresh the database to see the updated DB.
+
+Another option is to make this database by creating individual tables using CSVs. You can download the raw CSV files and use copy command to create required tables. CSV files are attached in the resources section of this lecture.
+
+Sharing the link of resource page again, if you want to download the data files again.
+
+https://starttechacademy.com/resources-data-analytics-with-sql/
+
+If you still face any issue, please take a screenshot of the error details and share that with us, so that we can help you in debugging the issue.
