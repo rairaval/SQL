@@ -1,0 +1,234 @@
+*** SELECT ***
+------------------------------------------------------------------------
+
+The SELECT statement is used to fetch the data from a database table which returns this data in the form of a result 
+table. These result tables are called result-sets.
+
+Si quiero especificar las columnas:
+
+SELECT "column_name1", "column_name2", "column_name3" FROM 
+"table_name";
+
+Si no quiero especificar ninguna columna en particular
+SELECT * FROM "table_name";
+
+------------------------------------------------------------------------
+EJEMPLOS:
+first_name es en nombre de la columna
+customer_table es en nombre de la tabla.
+
+➢ Select one column
+SELECT first_name FROM customer_table;
+
+➢ Select multiple columns
+SELECT first_name, last_name FROM customer_table;
+
+➢ Select all columns
+SELECT * FROM customer_table;
+
+------------------------------------------------------------------------
+
+*** SELECT DISTINCT ***
+Will eliminate all duplicates records and it will fetch only unique records.
+Puedo nombrar mas de una columna. 
+
+SELECT DISTINCT "column_name"
+FROM "table_name";
+
+➢ Select one column
+SELECT DISTINCT customer_name FROM customer_table;
+➢ Select multiple columns
+SELECT DISTINCT customer_name, age FROM customer_table;
+➢ Te selecciona los unicos de toda la tabla
+select distinct * from customer_table;
+
+----------------------------------------------------------------------
+**** WHERE ****
+
+The SQL WHERE clause is used to specify a condition while fetching the data from a single table or by joining with 
+multiple tables. If the given condition is satisfied, then only it returns a specific value from the table.
+LA CONDICION SE ESTABLECE CON EL WHERE.
+
+
+SELECT "column_name"
+FROM "table_name"
+WHERE "condition";
+
+QUEREMOS SABER SI HAY ALGUN CLIENTE CON 25 AÑOS
+➢ Equals to condition
+SELECT first_name FROM customer_table WHERE age = 25;
+
+➢ Less than/ Greater than condition
+SELECT first_name, age FROM customer_table WHERE age>25;
+
+➢ Matching text condition
+SELECT * FROM customer_table WHERE first_name = “John”;
+
+Usando el distinct tambien puede ser:
+SELECT distinct first_name FROM customer_table WHERE age = 25;
+SELECT distinct first_name FROM customer_table WHERE age > 25;
+Tambien se puede poner condicionantes en variables textuales
+SELECT * from customer_table where first_name = 'bee';
+
+-------------------------------------------------------------------
+***** AND OR *****
+******************
+The SQL AND & OR operators are used to combine MULTIPLE CONDITIONS to narrow data in an SQL statement. These two 
+operators are called as the conjunctive operators.
+
+SELECT "column_name"
+FROM "table_name"
+WHERE "simple condition"
+{ [AND|OR] "simple condition"}+;
+
+SI QUERES EL OPERADOR AND LO ESCRIBIS Y SINO ELEGIS EL OR. Asi hasta llegar al numero n de condiciones. 
+
+LOS QUE ESTAN ENTRE 20 Y 30 AÑOS:
+
+SELECT first_name, last_name, age
+FROM customer_table
+WHERE age>20
+AND age<30;
+
+lOS QUE SON MENORES DE 20, MAYORES DE 30 O CON EL NOMBRE JHON
+SELECT first_name, last_name, age
+FROM customer_table
+WHERE age<20
+OR age>30
+OR first_name = ‘John’;
+No hay ningun jhon pero si lo hubiese lo trairia.
+
+-----------------------------------------------------------------------
+**** NOT ****
+*************
+
+LA SINTAXIS:
+SELECT "column_name"
+FROM "table_name"
+WHERE NOT "simple condition"
+
+EJEMPLOS:
+No tiene 42
+
+SELECT first_name,last_name, age
+FROM customer_table
+WHERE NOT age=42
+
+No tiene 22 y no se llama df
+
+SELECT first_name,last_name, age
+FROM customer_table
+WHERE NOT age=22
+AND NOT first_name = 'df';
+
+select * from customer_table where not age=42;
+select * from customer_table where not age=42 and not first_name = 'bee';
+
+-------------------------------------------------------------------------
+**** UPDATE ****
+****************
+The SQL UPDATE Query is used to modify the existing records in a table.
+
+UPDATE "table_name"
+SET column_1 = [value1], column_2 = [value2], ...
+WHERE "condition";
+
+WE CAN USE WHERE TO UPDATE PARTICULAR RECORDS.
+IF YOU WANT TO UPDATE THE WHOLE TABLE WE MAY NOT USE THE WHERE CONDITION
+
+SUPONGAMOS QUE QUIERO ACTUALIZAR: LA EDAD Y EL APELLIDO DE LA FILA CON UN ID DE 2
+➢ Single row (with column names specified)
+UPDATE Customer_table
+SET Age = 17, Last_name = ‘Pe'
+WHERE Cust_id = 2;
+
+Otros ejemplos
+update customer_table SET last_name = 'Pe', age = 23 WHERE Cust_id = 2;
+update customer_table SET email_id = 'bee@xyz.com' WHERE first_name = 'bee' or first_name = 'Bee';
+
+➢ Multiple rows
+UPDATE Customer_table
+SET email_id = ‘gee@xyz.com
+WHERE First_name = ‘Gee’ or First_name = ‘gee’;
+
+-------------------------------------------------------------------------
+**** DELETE ****
+****************
+
+The DELETE Query is used to delete the existing records from a table.
+
+DELETE FROM "table_name"
+WHERE "condition"; 
+
+EJEMPLOS
+
+➢ Single row 
+DELETE FROM customer_table
+WHERE ID = 6;
+
+➢ Multiple rows
+DELETE FROM customer_table
+WHERE age>25;
+
+➢ All rows
+DELETE FROM customer_table;
+
+-------------------------------------------------------------------------
+**** ALTER ****
+***************
+Como Cambiar la estructura de la tabla.
+Cambiarle el nombre de la columna, el tipo de columna, agregar o eliminar una columna, se le llama cambiar la estructura de la tabla. 
+The ALTER TABLE statement is used to change the definition or structure of an existing table
+
+ALTER TABLE "table_name"
+[Specify Actions];
+
+Following actions can be performed (las acciones pueden ser clasificadas en tres tipos):
+• Columns – Add, Delete (Drop), Modify or Rename
+• Constraints – Add, Drop
+• Index – Add, Drop
+
+COLUMN -ADD AND DROP
+The basic syntax of an ALTER TABLE command to add/drop a Column in an existing table is as follows.
+
+ALTER TABLE "table_name"
+ADD "column_name" "Data Type";
+
+ALTER TABLE "table_name"
+DROP "column_name";
+
+COLUMN – MODIFY & RENAME
+The basic syntax of an ALTER TABLE command to Modify/Rename a Column in an existing table is as follows.
+
+ALTER TABLE "table_name"
+ALTER COLUMN "column_name" TYPE "New Data Type";
+Ejemplo:
+ALTER TABLE customer_table
+ALTER column age type varchar(255);
+
+ALTER TABLE "table_name"
+RENAME COLUMN "column 1" TO "column 2";
+
+Constraints/Restricciones.
+The basic syntax of an ALTER TABLE command to add/drop a Constraint on a existing table is as follows: 
+
+1. ALTER TABLE "table_name“ ALTER COLUMN “column_name” SET NOT NULL;
+
+DEBE TENER AL MENOS UN VALOR, SI TODOS LOS VALORES SON NULL, EALTER TABLE customer_table
+ALTER COLUMN email_costumer SET NOT NULL; ESTE COMANDO EVITA QUE PUEDA INTRODUCIR NULOS EN LA TABLASTE COMANDO DARA ERROR. 
+
+2. ALTER TABLE "table_name“ ALTER COLUMN “column_name” DROP NOT NULL;
+
+
+3. ALTER TABLE "table_name" ADD CONSTRAINT “column_name” CHECK 
+(“column_name”>=100);
+AgregarConstreinumerica
+ALTER TABLE customer_table add constraint cust_id CHECK (cust_id>0);
+insert into customer_table values (-1,'raul','vila',25,'raul@gmail.com'); ESTO ME DARIA ERROR PORQUE VIOLA LA CONDICION
+
+4. ALTER TABLE "table_name" ADD PRIMARY KEY (“column_name”);
+SI LA COLUMNA CONTIENE VALORES NULL NO LA PUEDO NOMBRAR COO PRIMARY KEY.
+OJO. HAY QUE MANTENER LOS PARENTESIS. 
+
+5. ALTER TABLE “child_table" ADD CONSTRAINT “child_column” 
+FOREIGN KEY (“parent column”) REFERENCES “parent table”;
